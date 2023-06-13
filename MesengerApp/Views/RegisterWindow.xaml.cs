@@ -10,7 +10,6 @@ public partial class RegisterWindow : UserControl
 
     private void Reset_Click(object sender, System.Windows.RoutedEventArgs e)
     {
-        this.textBoxAddress.Text = string.Empty;
         this.textBoxEmail.Text = string.Empty;
         this.textBoxFirstName.Text = string.Empty;
         this.textBoxLastName.Text = string.Empty;
