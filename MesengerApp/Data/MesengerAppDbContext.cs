@@ -9,6 +9,8 @@ public class MesengerAppDbContext : DbContext
     private const string connectionString = $"Server=localhost;Database=MesengerAppDb;Trusted_Connection=True;TrustServerCertificate=True;";
 
     public DbSet<User> Users { get; set; }
+    public DbSet<Chat> Chats { get; set; }
+    public DbSet<Group> Groups { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

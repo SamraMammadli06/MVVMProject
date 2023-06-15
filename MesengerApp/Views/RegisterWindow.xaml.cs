@@ -13,8 +13,8 @@ public partial class RegisterWindow : UserControl
         this.textBoxEmail.Text = string.Empty;
         this.textBoxFirstName.Text = string.Empty;
         this.textBoxLastName.Text = string.Empty;
-        this.passwordBox1.Password = string.Empty;
-        this.passwordBoxConfirm.Password = string.Empty;
+        this.passwordBox1.Text = string.Empty;
+        this.passwordBoxConfirm.Text = string.Empty;
     }
 }
 

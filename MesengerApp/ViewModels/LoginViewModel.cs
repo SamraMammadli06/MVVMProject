@@ -3,19 +3,47 @@ using MesengerApp.Messager.Messages;
 using MesengerApp.Services;
 using System;
 using System.Windows;
+using MesengerApp.Data.Repositories;
 
 namespace MesengerApp.ViewModels;
 public class LoginViewModel : ViewModelBase
 {
+    private readonly userRepository userRepository = new userRepository();
     private readonly IMessenger messenger;
     public LoginViewModel(IMessenger messenger)
     {
         this.messenger = messenger;
     }
 
+
+    #region Properities
+
+    private string? name;
+    public string? Name
+    {
+        get { return name; }
+        set => base.PropertyChange(out name, value);
+    }
+
+    private string? password;
+    public string? Password
+    {
+        get { return password; }
+        set => base.PropertyChange(out password, value);
+    }
+
+    private string? errormessage;
+    public string? ErrorMessage
+    {
+        get { return errormessage; }
+        set=>base.PropertyChange(out errormessage, value);
+    }
+    #endregion
+
     #region Commands
 
     private MyCommand? registerComand;
+    private MyCommand? loginComand;
 
     public MyCommand RegisterComand
     {
@@ -24,6 +52,13 @@ public class LoginViewModel : ViewModelBase
             predicate: () => true);
         set => base.PropertyChange(out this.registerComand, value);
     }
+    public MyCommand LoginComand
+    {
+        get => this.loginComand ??= new MyCommand(
+            action: () => LoginUser(),
+            predicate: () => !(string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(password)));
+        set => base.PropertyChange(out this.loginComand, value);
+    }
     #endregion
 
     #region Methods
@@ -31,21 +66,34 @@ public class LoginViewModel : ViewModelBase
     {
         try
         {
-            //var user = this.usersRepository.Login(this.Login, this.Password);
-
-            //this.Login = string.Empty;
-            //this.Password = string.Empty;
-
-            //this.messenger.Send(new SendLoginedUserMessage(user) { WhenLogined = DateTime.Now });
             this.messenger.Send(new NavigationMessage(typeof(RegisterViewModel)));
         }
         catch (Exception ex)
         {
-            MessageBox.Show(
-                messageBoxText: ex.Message,
-                caption: "User SignUp Error",
-                button: MessageBoxButton.OK,
-                icon: MessageBoxImage.Error);
+            ErrorMessage = ex.Message;
+        }
+    }
+    void LoginUser()
+    {
+        try
+        {
+            var user = this.userRepository.Login(this.Name, this.Password);
+
+            this.Name = string.Empty;
+            this.Password = string.Empty;
+            if (user != null)
+            {
+                this.messenger.Send(new SendLoginedUserMessage(user));
+                this.messenger.Send(new NavigationMessage(typeof(ChatsViewModel)));
+            }
+            else
+            {
+                ErrorMessage = "User not found";
+            }
+        }
+        catch (Exception ex)
+        {
+            ErrorMessage = ex.Message;
         }
     }
     #endregion

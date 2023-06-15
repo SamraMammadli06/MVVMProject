@@ -30,7 +30,7 @@
                             Margin="0,35,0,0">
 
 
-                    <TextBlock Text="Messanger"
+                    <TextBlock Text="Messenger"
                                Foreground="#462AD8"
                                FontSize="25"
                                FontWeight="Medium"
@@ -39,7 +39,7 @@
 
 
 
-                    <TextBlock Text="Username"
+                    <TextBlock Text="Name"
                                Foreground="#462AD8"
                                FontSize="12"
                                FontWeight="Medium"
@@ -47,6 +47,7 @@
                                Margin="0,35,0,0"/>
 
                     <TextBox x:Name="txtUser"
+                             Text="{Binding Name}"
                              FontSize="13"
                              FontWeight="Medium"
                              FontFamily="Montserrat"  
@@ -65,6 +66,7 @@
                                Margin="0,15,0,0"/>
 
                     <TextBox x:Name="PassText"
+                             Text="{Binding Password}"
                              FontSize="13"
                              FontWeight="Medium"
                              FontFamily="Montserrat"
@@ -90,7 +92,8 @@
                             FontSize="12"
                             FontFamily="Montserrat"
                             Cursor="Hand"                           
-                            Margin="0,30,0,0">
+                            Margin="0,30,0,0"
+                            Command="{Binding LoginComand}">
 
                         <Button.Style>
                             <Style TargetType="Button">

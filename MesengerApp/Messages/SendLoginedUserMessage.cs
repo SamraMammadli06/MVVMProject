@@ -7,7 +7,6 @@ using System;
 public class SendLoginedUserMessage : IMessage
 {
     public User LoginedUser { get; set; }
-    public DateTime? WhenLogined { get; set; }
 
     public SendLoginedUserMessage(User loginedUser)
     {

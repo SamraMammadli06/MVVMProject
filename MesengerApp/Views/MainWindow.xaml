@@ -6,8 +6,10 @@
         xmlns:local="clr-namespace:MesengerApp"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-   
+       
         <Grid>
+       
             <ContentControl Content="{Binding ActiveViewModel}"/>
-        </Grid>
+
+    </Grid>
 </Window>
