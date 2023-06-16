@@ -1,4 +1,5 @@
 ﻿using MesengerApp.Classes;
+using MesengerApp.Data.Repositories;
 using MesengerApp.Messager.Messages;
 using MesengerApp.Services;
 using MesengerApp.Tools;
@@ -13,11 +14,22 @@ namespace MesengerApp.ViewModels
     public class AboutUsViewModel :ViewModelBase
     {
 
-        User currentUser;
+        User? currentUser;
+        UserDapperRepos UserDapperRepos = new UserDapperRepos();
         private readonly IMessenger messenger;
         public AboutUsViewModel(IMessenger messenger)
         {
             this.messenger = messenger;
+            this.messenger.Subscribe<SendLoginedUserMessage>(obj =>
+            {
+                if (obj is SendLoginedUserMessage message)
+                {
+                    this.CurrentUser = message.LoginedUser;
+                }
+            });
+            countUsers = UserDapperRepos.GetUsersCount();
+            countMessages = UserDapperRepos.GetMessagesCount();
+            countGroups = UserDapperRepos.GetGroupsCount();
         }
         public User? CurrentUser
         {
@@ -25,6 +37,24 @@ namespace MesengerApp.ViewModels
             set => base.PropertyChange(out currentUser, value);
         }
 
+        string countUsers;
+        public string? CountUsers
+        {
+            get { return countUsers; }
+            set => base.PropertyChange(out countUsers, value);
+        }
+        string countMessages;
+        public string? CountMessages
+        {
+            get { return countMessages; }
+            set => base.PropertyChange(out countMessages, value);
+        }
+        string countGroups;
+        public string? CountGroups
+        {
+            get { return countGroups; }
+            set => base.PropertyChange(out countGroups, value);
+        }
         #region Commands
         private MyCommand? profileComand;
         private MyCommand? chatsComand;

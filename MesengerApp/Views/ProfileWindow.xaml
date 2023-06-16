@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:MesengerApp.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
-              Background="#FFC4A4C3">
+             Background="#FFC4A4C3">
     <Grid >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"/>
@@ -25,9 +25,25 @@
                 <Button  Command="{Binding AboutusComand}" Padding="30" Content="About Us" Background="#FFC4A4C3"/>
             </Menu>
         </DockPanel>
-        <StackPanel Grid.Column="1">
-            <Label Content="Profile" FontSize="25" HorizontalAlignment="Center"/>
-            
-        </StackPanel>
+        <Grid Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250"/>
+                <ColumnDefinition Width="300"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="1">
+                <Label Content="Profile" FontSize="25" HorizontalAlignment="Center"/>
+                <Label Content="Name: "/>
+                <TextBox  FontSize="15" Text="{Binding CurrentUser.Name}" />
+
+                <Label Content="Surname: "/>
+                <TextBox FontSize="15" Text="{Binding CurrentUser.Surname}"  />
+                <Label Content="Email: "/>
+                <TextBox  FontSize="15" Text="{Binding CurrentUser.Email}"  />
+                <Label Content="Password: "/>
+                <TextBox  FontSize="15" Text="{Binding CurrentUser.Password}" />
+                <Label x:Name="ErrorLabel" Content="{Binding ErrorMessage}" Foreground="Red"/>
+            </StackPanel>
+            <Button Command="{Binding ChangeComand}" Grid.Column="1" Content="Save" Height="30" HorizontalAlignment="Left" Margin="0,300,0,0"  VerticalAlignment="Top" Width="300" />
+        </Grid>
     </Grid>
 </UserControl>

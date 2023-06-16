@@ -15,10 +15,21 @@ public class userRepository
         var u = context.Users.FirstOrDefault(u => u.Name == name && u.Password == password);
         return u;
     }
-    public void AddUser(User user)
+    public User GetUser(int id)
     {
-        context.Users.Add(user);
-        context.SaveChanges();
+        var u = context.Users.FirstOrDefault(u => u.Id==id);
+        return u;
+    }
+    public User AddUser(User user)
+    {
+        var u = context.Users.FirstOrDefault(u => u.Name == user.Name);
+        if(u == null)
+        {
+            context.Users.Add(user);
+            context.SaveChanges();
+            return u;
+        }
+        return u;
     }
 }
 

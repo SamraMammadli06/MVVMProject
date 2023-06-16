@@ -25,8 +25,26 @@
                 <Button  Padding="30" Content="About Us" Background="#FFC4A4C3"/>
             </Menu>
         </DockPanel>
-        <StackPanel Grid.Column="1">
-            <Label Content="About Us" FontSize="25" HorizontalAlignment="Center"/>
-        </StackPanel>
+        <Grid Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="500"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="1">
+                <Label Content="About Us" FontSize="25" HorizontalAlignment="Center"/>
+                <Label Content="What is Messenger for you?"/>
+                <Label Content="Messenger is used to send messages and exchange photos, videos, stickers, audio, "/>
+                <Label  Content="and files, and also react to other users' messages and interact with bots. "/>
+                <Label Content="The service also supports voice and video calling."/>
+
+
+                <Label Margin="0 100 0 0" Content="Count of Users:" />
+                <Label Content="{Binding CountUsers}"/>
+                <Label  Content="Count of Messages:" />
+                <Label Content="{Binding CountMessages}"/>
+                <Label  Content="Count of Groups:" />
+                <Label Content="{Binding CountGroups}"/>
+            </StackPanel>
+        </Grid>
     </Grid>
 </UserControl>

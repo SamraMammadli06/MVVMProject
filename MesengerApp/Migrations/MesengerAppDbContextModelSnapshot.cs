@@ -60,7 +60,7 @@ namespace MesengerApp.Migrations
 
                     b.HasIndex("SenderId");
 
-                    b.ToTable("Chat");
+                    b.ToTable("Chats");
                 });
 
             modelBuilder.Entity("MesengerApp.Classes.Group", b =>
@@ -83,7 +83,7 @@ namespace MesengerApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Group");
+                    b.ToTable("Groups");
                 });
 
             modelBuilder.Entity("MesengerApp.Classes.User", b =>

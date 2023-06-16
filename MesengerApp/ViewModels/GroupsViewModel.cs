@@ -13,11 +13,18 @@ namespace MesengerApp.ViewModels
     public class GroupsViewModel : ViewModelBase
     {
 
-        User currentUser;
+        User? currentUser;
         private readonly IMessenger messenger;
         public GroupsViewModel(IMessenger messenger)
         {
             this.messenger = messenger;
+            this.messenger.Subscribe<SendLoginedUserMessage>(obj =>
+            {
+                if (obj is SendLoginedUserMessage message)
+                {
+                    this.CurrentUser = message.LoginedUser;
+                }
+            });
         }
         public User? CurrentUser
         {

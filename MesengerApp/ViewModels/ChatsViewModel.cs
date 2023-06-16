@@ -11,11 +11,18 @@ using System.Threading.Tasks;
 namespace MesengerApp.ViewModels;
 public class ChatsViewModel : ViewModelBase
 {
-    User currentUser;
+    User? currentUser;
     private readonly IMessenger messenger;
     public ChatsViewModel(IMessenger messenger)
     {
         this.messenger = messenger;
+        this.messenger.Subscribe<SendLoginedUserMessage>(obj =>
+        {
+            if (obj is SendLoginedUserMessage message)
+            {
+                this.CurrentUser = message.LoginedUser;
+            }
+        });
     }
     public User? CurrentUser
     {

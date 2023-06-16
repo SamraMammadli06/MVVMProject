@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MesengerApp.Migrations
 {
     [DbContext(typeof(MesengerAppDbContext))]
-    [Migration("20230615183732_Update database")]
-    partial class Updatedatabase
+    [Migration("20230616110541_Update Database")]
+    partial class UpdateDatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -63,7 +63,7 @@ namespace MesengerApp.Migrations
 
                     b.HasIndex("SenderId");
 
-                    b.ToTable("Chat");
+                    b.ToTable("Chats");
                 });
 
             modelBuilder.Entity("MesengerApp.Classes.Group", b =>
@@ -86,7 +86,7 @@ namespace MesengerApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Group");
+                    b.ToTable("Groups");
                 });
 
             modelBuilder.Entity("MesengerApp.Classes.User", b =>

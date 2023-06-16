@@ -103,9 +103,15 @@ public class RegisterViewModel :ViewModelBase
                     Email = this.email,
                     Password = this.password,
                 };
-                this.userRepository.AddUser(user);
-                this.messenger.Send(new SendLoginedUserMessage(user));
-                this.messenger.Send(new NavigationMessage(typeof(ChatsViewModel)));
+               if(this.userRepository.AddUser(user) == null)
+               {
+                    this.messenger.Send(new SendLoginedUserMessage(user));
+                    this.messenger.Send(new NavigationMessage(typeof(ChatsViewModel)));
+               }
+               else
+               {
+                   ErrorMessage = "This user is already exsists";
+               }
             }
             else
             {
