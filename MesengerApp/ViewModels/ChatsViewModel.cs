@@ -1,17 +1,18 @@
 ﻿using MesengerApp.Classes;
+using MesengerApp.Classes.QueriesClasses;
+using MesengerApp.Data.Repositories;
 using MesengerApp.Messager.Messages;
 using MesengerApp.Services;
 using MesengerApp.Tools;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 
 namespace MesengerApp.ViewModels;
 public class ChatsViewModel : ViewModelBase
 {
     User? currentUser;
+    userRepository userRepository = new userRepository();
+
+    ObservableCollection<UserChat> UserChats { get; set; }
     private readonly IMessenger messenger;
     public ChatsViewModel(IMessenger messenger)
     {
@@ -23,12 +24,14 @@ public class ChatsViewModel : ViewModelBase
                 this.CurrentUser = message.LoginedUser;
             }
         });
+
     }
     public User? CurrentUser
     {
         get { return currentUser; }
         set => base.PropertyChange(out currentUser, value);
     }
+    
 
     #region Commands
     private MyCommand? profileComand;

@@ -1,4 +1,5 @@
 ﻿using MesengerApp.Classes;
+using MesengerApp.Classes.QueriesClasses;
 using MesengerApp.Data.Repositories;
 using MesengerApp.Messager.Messages;
 using MesengerApp.Services;
@@ -6,6 +7,7 @@ using MesengerApp.Tools;
 using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;

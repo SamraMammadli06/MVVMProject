@@ -5,7 +5,7 @@ namespace MesengerApp.Data.Repositories
 {
     public class UserDapperRepos
     {
-        private const string connectionString = $"Server=localhost;Database=MesengerAppDb;Trusted_Connection=True;TrustServerCertificate=True;";
+        private const string connectionString = $"Server=localhost;Database=MessengerAppDb;User Id=admin;Password=admin;TrustServerCertificate=True;";
         private SqlConnection connection;
 
         public UserDapperRepos()

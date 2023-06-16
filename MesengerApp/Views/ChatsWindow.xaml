@@ -27,7 +27,28 @@
         </DockPanel>
         <StackPanel Grid.Column="1">
             <Label Content="Chats" FontSize="25" HorizontalAlignment="Center"/>
-            
+            <ListView ItemsSource="{Binding Users}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Source="{Binding Avatar}"/>
+
+                            <StackPanel Grid.Column="2">
+                                <TextBlock Margin="5" FontSize="26" Text="{Binding Firstname}"/>
+                                <TextBlock Margin="5" FontSize="26" Text="{Binding Secondname}"/>
+
+                                <TextBlock Margin="5" FontSize="26" Text="{Binding BirthDate}"/>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackPanel>
     </Grid>
 </UserControl>
