@@ -95,6 +95,9 @@ namespace MesengerApp.ViewModels
         void Send()
         {
             repos.SendChat(CurrentUser.Id, Name, Tittle, Message);
+            this.Name = string.Empty;
+            this.Tittle = string.Empty;
+            this.Message = string.Empty;
         }
         void Profile()
         {
