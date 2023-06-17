@@ -1,5 +1,4 @@
 ﻿using MesengerApp.Classes;
-using MesengerApp.Classes.QueriesClasses;
 using MesengerApp.Data.Repositories;
 using MesengerApp.Messager.Messages;
 using MesengerApp.Services;
@@ -49,8 +48,16 @@ namespace MesengerApp.ViewModels
         #region Commands
         private MyCommand? chatsComand;
         private MyCommand? aboutusComand;
-        public MyCommand groupsComand;
         public MyCommand changeComand;
+        private MyCommand? newMessageComand;
+
+        public MyCommand NewMessageComand
+        {
+            get => this.newMessageComand ??= new MyCommand(
+                action: () => NewMessage(),
+                predicate: () => true);
+            set => base.PropertyChange(out this.newMessageComand, value);
+        }
 
         public MyCommand ChangeComand
         {
@@ -75,13 +82,7 @@ namespace MesengerApp.ViewModels
             set => base.PropertyChange(out this.aboutusComand, value);
         }
 
-        public MyCommand GroupsComand
-        {
-            get => this.groupsComand ??= new MyCommand(
-                action: () => Groups(),
-                predicate: () => true);
-            set => base.PropertyChange(out this.groupsComand, value);
-        }
+        
         #endregion
 
         #region Methods
@@ -104,13 +105,12 @@ namespace MesengerApp.ViewModels
             this.messenger.Send(new SendLoginedUserMessage(CurrentUser));
             this.messenger.Send(new NavigationMessage(typeof(ChatsViewModel)));
         }
-        void Groups()
+        void NewMessage()
         {
             this.ErrorMessage = string.Empty;
             this.messenger.Send(new SendLoginedUserMessage(CurrentUser));
-            this.messenger.Send(new NavigationMessage(typeof(GroupsViewModel)));
+            this.messenger.Send(new NavigationMessage(typeof(ChatsViewModel)));
         }
-
         void AboutUs()
         {
             this.ErrorMessage = string.Empty;

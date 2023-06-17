@@ -20,7 +20,7 @@
                     </ItemsPanelTemplate>
                 </Menu.ItemsPanel>
                 <Button  Command="{Binding ChatsComand}" Padding="30" Content="Chats" Margin="0 90 0 0" Background="#FFC4A4C3"/>
-                <Button Command="{Binding GroupsComand}" Padding="30" Content="Groups" Background="#FFC4A4C3"/>
+                <Button Command="{Binding NewMessageComand}" Padding="30" FontSize="15" Content="New" Background="#FFC4A4C3"/>
                 <Button Command="{Binding ProfileComand}" Padding="30" Content="Profile" Background="#FFC4A4C3"/>
                 <Button  Padding="30" Content="About Us" Background="#FFC4A4C3"/>
             </Menu>
@@ -42,8 +42,6 @@
                 <Label Content="{Binding CountUsers}"/>
                 <Label  Content="Count of Messages:" />
                 <Label Content="{Binding CountMessages}"/>
-                <Label  Content="Count of Groups:" />
-                <Label Content="{Binding CountGroups}"/>
             </StackPanel>
         </Grid>
     </Grid>

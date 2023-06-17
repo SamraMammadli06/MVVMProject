@@ -1,5 +1,8 @@
-﻿using System;
+﻿using MesengerApp.Data.Repositories;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,14 +18,12 @@ using System.Windows.Shapes;
 
 namespace MesengerApp.Views
 {
-    /// <summary>
-    /// Interaction logic for ChatsWindow.xaml
-    /// </summary>
     public partial class ChatsWindow : UserControl
     {
         public ChatsWindow()
         {
             InitializeComponent();
+            
         }
     }
 }

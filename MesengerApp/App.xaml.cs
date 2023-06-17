@@ -27,9 +27,9 @@ public partial class App : Application
         ServiceContainer.RegisterSingleton<LoginViewModel>();
         ServiceContainer.RegisterSingleton<RegisterViewModel>();
         ServiceContainer.RegisterSingleton<ChatsViewModel>();
-        ServiceContainer.RegisterSingleton<GroupsViewModel>();
         ServiceContainer.RegisterSingleton<ProfileViewModel>();
         ServiceContainer.RegisterSingleton<AboutUsViewModel>();
+        ServiceContainer.RegisterSingleton<AddMessageVM>();
 
         ServiceContainer.Verify();
     }

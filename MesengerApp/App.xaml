@@ -18,14 +18,14 @@
         <DataTemplate DataType="{x:Type vm:ChatsViewModel}">
             <v:ChatsWindow/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type vm:GroupsViewModel}">
-            <v:GroupsWindow/>
-        </DataTemplate>
         <DataTemplate DataType="{x:Type vm:AboutUsViewModel}">
             <v:AboutUsWindow/>
         </DataTemplate>
         <DataTemplate DataType="{x:Type vm:ProfileViewModel}">
             <v:ProfileWindow/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:AddMessageVM}">
+            <v:AddMessageWindow/>
         </DataTemplate>
     </Application.Resources>
 </Application>

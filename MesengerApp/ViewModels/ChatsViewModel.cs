@@ -1,19 +1,34 @@
 ﻿using MesengerApp.Classes;
-using MesengerApp.Classes.QueriesClasses;
 using MesengerApp.Data.Repositories;
 using MesengerApp.Messager.Messages;
+using MesengerApp.Messages;
 using MesengerApp.Services;
 using MesengerApp.Tools;
 using System.Collections.ObjectModel;
+using System.Windows;
 
 namespace MesengerApp.ViewModels;
 public class ChatsViewModel : ViewModelBase
 {
-    User? currentUser;
+    User currentUser;
     userRepository userRepository = new userRepository();
+    public User CurrentUser
+    {
+        get { return currentUser; }
+        set => base.PropertyChange(out currentUser, value);
+    }
 
-    ObservableCollection<UserChat> UserChats { get; set; }
     private readonly IMessenger messenger;
+    ObservableCollection<User> users;
+    public ObservableCollection<User> Users { get { return users; } 
+        set => base.PropertyChange(out users,value);
+    }
+    ObservableCollection<Chat> chats;
+    public ObservableCollection<Chat> Chats
+    {
+        get { return chats; }
+        set => base.PropertyChange(out chats, value);
+    }
     public ChatsViewModel(IMessenger messenger)
     {
         this.messenger = messenger;
@@ -24,21 +39,39 @@ public class ChatsViewModel : ViewModelBase
                 this.CurrentUser = message.LoginedUser;
             }
         });
+        this.messenger.Subscribe<SendAllUsers>(obj =>
+        {
+            if (obj is SendAllUsers message)
+            {
+                this.Users = message.Users;
+            }
+        });
+        
+    }
 
-    }
-    public User? CurrentUser
+    public string selectedItem;
+    public string SelectedItem
     {
-        get { return currentUser; }
-        set => base.PropertyChange(out currentUser, value);
+        get {
+            this.Chats = new ObservableCollection<Chat>(userRepository.GetChat(currentUser.Id, sendername: selectedItem));
+            return selectedItem;
+        }
+        set {
+            base.PropertyChange(out selectedItem, value); }
     }
-    
 
     #region Commands
     private MyCommand? profileComand;
     private MyCommand? aboutusComand;
-    public MyCommand? groupsComand;
+    private MyCommand? newMessageComand;
 
-
+    public MyCommand NewMessageComand
+    {
+        get => this.newMessageComand ??= new MyCommand(
+            action: () => NewMessage(),
+            predicate: () => true);
+        set => base.PropertyChange(out this.newMessageComand, value);
+    }
     public MyCommand ProfileComand
     {
         get => this.profileComand ??= new MyCommand(
@@ -54,13 +87,7 @@ public class ChatsViewModel : ViewModelBase
         set => base.PropertyChange(out this.aboutusComand, value);
     }
 
-    public MyCommand GroupsComand
-    {
-        get => this.groupsComand ??= new MyCommand(
-            action: () => Groups(),
-            predicate: () => true);
-        set => base.PropertyChange(out this.groupsComand, value);
-    }
+  
     #endregion
 
     #region Methods
@@ -69,12 +96,11 @@ public class ChatsViewModel : ViewModelBase
             this.messenger.Send(new SendLoginedUserMessage(CurrentUser));
             this.messenger.Send(new NavigationMessage(typeof(ProfileViewModel)));
     }
-    void Groups()
+    void NewMessage()
     {
         this.messenger.Send(new SendLoginedUserMessage(CurrentUser));
-        this.messenger.Send(new NavigationMessage(typeof(GroupsViewModel)));
+        this.messenger.Send(new NavigationMessage(typeof(AddMessageVM)));
     }
-
     void AboutUs()
     {
         this.messenger.Send(new NavigationMessage(typeof(AboutUsViewModel)));    

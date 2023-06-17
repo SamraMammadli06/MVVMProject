@@ -29,7 +29,6 @@ namespace MesengerApp.ViewModels
             });
             countUsers = UserDapperRepos.GetUsersCount();
             countMessages = UserDapperRepos.GetMessagesCount();
-            countGroups = UserDapperRepos.GetGroupsCount();
         }
         public User? CurrentUser
         {
@@ -49,17 +48,19 @@ namespace MesengerApp.ViewModels
             get { return countMessages; }
             set => base.PropertyChange(out countMessages, value);
         }
-        string countGroups;
-        public string? CountGroups
-        {
-            get { return countGroups; }
-            set => base.PropertyChange(out countGroups, value);
-        }
+        
         #region Commands
         private MyCommand? profileComand;
         private MyCommand? chatsComand;
-        public MyCommand groupsComand;
+        private MyCommand? newMessageComand;
 
+        public MyCommand NewMessageComand
+        {
+            get => this.newMessageComand ??= new MyCommand(
+                action: () => NewMessage(),
+                predicate: () => true);
+            set => base.PropertyChange(out this.newMessageComand, value);
+        }
 
         public MyCommand ProfileComand
         {
@@ -76,13 +77,6 @@ namespace MesengerApp.ViewModels
             set => base.PropertyChange(out this.chatsComand, value);
         }
 
-        public MyCommand GroupsComand
-        {
-            get => this.groupsComand ??= new MyCommand(
-                action: () => Groups(),
-                predicate: () => true);
-            set => base.PropertyChange(out this.groupsComand, value);
-        }
         #endregion
 
         #region Methods
@@ -91,12 +85,11 @@ namespace MesengerApp.ViewModels
             this.messenger.Send(new SendLoginedUserMessage(CurrentUser));
             this.messenger.Send(new NavigationMessage(typeof(ProfileViewModel)));
         }
-        void Groups()
+        void NewMessage()
         {
             this.messenger.Send(new SendLoginedUserMessage(CurrentUser));
-            this.messenger.Send(new NavigationMessage(typeof(GroupsViewModel)));
+            this.messenger.Send(new NavigationMessage(typeof(ProfileViewModel)));
         }
-
         void Chats()
         {
             this.messenger.Send(new SendLoginedUserMessage(CurrentUser));

@@ -9,6 +9,9 @@ public class User
     public string Password { get; set; }
     public string? Surname { get; set; }
     public List<Chat> Chats { get; set; }
-    public List<Group> Groups { get; set; }
+    public override string ToString()
+    {
+        return this.Name;
+    }
 }
 

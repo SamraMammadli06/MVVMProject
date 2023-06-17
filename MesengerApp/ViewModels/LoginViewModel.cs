@@ -4,6 +4,7 @@ using MesengerApp.Services;
 using System;
 using System.Windows;
 using MesengerApp.Data.Repositories;
+using MesengerApp.Messages;
 
 namespace MesengerApp.ViewModels;
 public class LoginViewModel : ViewModelBase
@@ -84,6 +85,7 @@ public class LoginViewModel : ViewModelBase
             if (user != null)
             {
                 this.messenger.Send(new SendLoginedUserMessage(user));
+                this.messenger.Send(new SendAllUsers(user));
                 this.messenger.Send(new NavigationMessage(typeof(ChatsViewModel)));
             }
             else

@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace MesengerApp.Views
 {
     /// <summary>
-    /// Interaction logic for GroupsWindow.xaml
+    /// Interaction logic for AddMessageWindow.xaml
     /// </summary>
-    public partial class GroupsWindow : UserControl
+    public partial class AddMessageWindow : UserControl
     {
-        public GroupsWindow()
+        public AddMessageWindow()
         {
             InitializeComponent();
         }

@@ -1,6 +1,9 @@
 ﻿using MesengerApp.Add;
 using MesengerApp.Classes;
+using MesengerApp.Messager.Messages;
+using MesengerApp.ViewModels;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 
 namespace MesengerApp.Data.Repositories;
@@ -28,13 +31,12 @@ public class userRepository
         }
         return u;
     }
-    public List<string> GetUsersName(int id)
+    public List<User> GetUsers(int id)
     {
-        var query = context.Users.Where(u=>u.Id!=id).Select(u => u.Name);
+        var query = context.Users.Where(u=>u.Id!=id);
         var r = query.ToList();
         return r;
     }
-
     public List<Chat> GetChat(int id,string sendername)
     {
         var query = context.Chats
